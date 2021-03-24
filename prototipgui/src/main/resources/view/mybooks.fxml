@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color:  #CCCCCC;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false" layoutY="60.0" prefHeight="400.0" prefWidth="1000.0" spacing="10.0" style="-fx-spacing: 5;">
+            <TableView fx:id="tableView" blendMode="OVERLAY" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="279.0" prefWidth="760.0">
+                <columns>
+                    <TableColumn fx:id="tableColumnImg" prefWidth="100.0" style="-fx-font-family:'Century Gothic'" text="Image" />
+                    <TableColumn fx:id="tableColumnTitle" prefWidth="100.0" style="-fx-font-family:'Century Gothic'" text="Title" />
+                    <TableColumn fx:id="tableColumnAuthor" prefWidth="100.0" style="-fx-font-family:'Century Gothic'" text="Author" />
+                    <TableColumn fx:id="tableColumnEdition" prefWidth="100.0" style="-fx-font-family:'Century Gothic'" text="Edition" />
+                    <TableColumn fx:id="tableColumnPH" prefWidth="120.0" style="-fx-font-family:'Century Gothic'" text="Publishing house" />
+                    <TableColumn fx:id="tableColumnStart" prefWidth="120.0" style="-fx-font-family:'Century Gothic'" text="Started on" />
+                    <TableColumn fx:id="tableColumnEnd" prefWidth="120.0" style="-fx-font-family:'Century Gothic'" text="Finished on" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color:  #CCCCCC;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false" layoutY="60.0" prefHeight="400.0" prefWidth="1000.0" spacing="10.0" style="-fx-spacing: 5;">
+            <TextField fx:id="search" alignment="CENTER" layoutX="405.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="192.0" promptText="Search book" style="-fx-background-radius: 15;">
+                <font>
+                    <Font name="Century Gothic" size="12.0" />
+                </font>
+            </TextField>
+            <CheckBox mnemonicParsing="false" style="-fx-font-family:'Century Gothic'" text="Ready to borrow" />
+            <TableView fx:id="tableView" blendMode="OVERLAY" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="279.0" prefWidth="962.0">
+                <columns>
+                    <TableColumn fx:id="tableColumnImg" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Image" />
+                    <TableColumn fx:id="tableColumnTitle" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Title" />
+                    <TableColumn fx:id="tableColumnAuthor" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Author" />
+                    <TableColumn fx:id="tableColumnEdition" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Edition" />
+                    <TableColumn fx:id="tableColumnPH" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Publishing house" />
+                </columns>
+            </TableView>
+            <Button fx:id="BorrowButton" layoutX="169.0" layoutY="374.0" mnemonicParsing="false" onAction="#borrow" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #666699; -fx-background-radius: 15;" text="Borrow" textFill="#f5f2f2">
+                <font>
+                    <Font name="Segoe UI Light" size="14.0" />
+                </font>
+            </Button>
+        </VBox>
+    </center>
+</BorderPane>
