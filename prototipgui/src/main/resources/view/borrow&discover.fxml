@@ -15,11 +15,12 @@
             <CheckBox mnemonicParsing="false" style="-fx-font-family:'Century Gothic'" text="Ready to borrow" />
             <TableView fx:id="tableView" blendMode="OVERLAY" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="279.0" prefWidth="962.0">
                 <columns>
-                    <TableColumn fx:id="tableColumnImg" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Image" />
-                    <TableColumn fx:id="tableColumnTitle" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Title" />
-                    <TableColumn fx:id="tableColumnAuthor" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Author" />
-                    <TableColumn fx:id="tableColumnEdition" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Edition" />
-                    <TableColumn fx:id="tableColumnPH" prefWidth="200.0" style="-fx-font-family:'Century Gothic'" text="Publishing house" />
+                    <TableColumn fx:id="tableColumnImg" prefWidth="149.99998396635056" style="-fx-font-family:'Century Gothic'" text="Image" />
+                    <TableColumn fx:id="tableColumnIsbn" prefWidth="149.99998396635056" style="-fx-font-family:'Century Gothic'" text="Isbn" />
+                    <TableColumn fx:id="tableColumnTitle" prefWidth="181.39996337890625" style="-fx-font-family:'Century Gothic'" text="Title" />
+                    <TableColumn fx:id="tableColumnAuthor" prefWidth="163.4000244140625" style="-fx-font-family:'Century Gothic'" text="Author" />
+                    <TableColumn fx:id="tableColumnEdition" prefWidth="86.2000732421875" style="-fx-font-family:'Century Gothic'" text="Edition" />
+                    <TableColumn fx:id="tableColumnPH" prefWidth="228.80002441406248" style="-fx-font-family:'Century Gothic'" text="Publishing house" />
                 </columns>
             </TableView>
             <Button fx:id="BorrowButton" layoutX="169.0" layoutY="374.0" mnemonicParsing="false" onAction="#borrow" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #666699; -fx-background-radius: 15;" text="Borrow" textFill="#f5f2f2">
