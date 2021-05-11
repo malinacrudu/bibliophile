@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="domain.Book"
+           table="Books">
+        <id name="id" type="long">
+            <generator class="increment"/>
+        </id>
+        <property name ="isbn"/>
+        <property name ="title"/>
+        <property name ="author"/>
+        <property name ="publishing_house"/>
+        <property name ="edition"/>
+        <property name ="img_path"/>
+        <property name ="already_borrowed"/>
+    </class>
+</hibernate-mapping>

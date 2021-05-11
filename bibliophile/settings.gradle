@@ -1,0 +1,8 @@
+rootProject.name = 'prototipgui'
+include 'Client'
+include 'Model'
+include 'Networking'
+include 'Persistence'
+include 'Server'
+include 'Services'
+
