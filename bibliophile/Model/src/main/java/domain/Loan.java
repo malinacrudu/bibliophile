@@ -9,6 +9,7 @@ public class Loan extends Entity<Long> implements Serializable
     private Book book;
     private LocalDate loanDate;
     private boolean returned;
+    private Long readerId;
 
     public Loan(Reader reader, Book book, LocalDate loanDate, boolean returned) {
         this.reader = reader;
