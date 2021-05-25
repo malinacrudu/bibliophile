@@ -17,7 +17,7 @@
                     <TableColumn fx:id="tableColumnDateB" prefWidth="120" style="-fx-font-family:'Century Gothic'" text="Date borrowed" />
                 </columns>
             </TableView>
-            <Button fx:id="BorrowButton" layoutX="169.0" layoutY="374.0" mnemonicParsing="false" onAction="#return_book" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #B97D60; -fx-background-radius: 15;" text="Returned" textFill="#f5f2f2">
+            <Button fx:id="returnButton" layoutX="169.0" layoutY="374.0" mnemonicParsing="false" onAction="#return_book" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #B97D60; -fx-background-radius: 15;" text="Returned" textFill="#f5f2f2">
                 <font>
                     <Font name="Segoe UI Light" size="14.0" />
                 </font>
