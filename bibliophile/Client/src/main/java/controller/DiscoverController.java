@@ -2,6 +2,7 @@ package controller;
 import domain.Book;
 import domain.Loan;
 import domain.Reader;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +14,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import service.IService;
+import service.Observer;
+
 import java.io.File;
 import java.time.LocalDate;
 
-public class DiscoverController {
+public class DiscoverController implements Observer {
 
     public TableColumn<Book, ImageView> tableColumnImg;
     public TableColumn<Book,String> tableColumnIsbn;
@@ -34,6 +37,7 @@ public class DiscoverController {
     public void setService(IService service, Reader reader) {
         this.service = service;
         this.reader = reader;
+        this.service.addObserver(this);
         initModel();
     }
 
@@ -129,5 +133,10 @@ public class DiscoverController {
            alert.setResizable(true);
            alert.show();
        }
+    }
+
+    @Override
+    public void update() {
+        Platform.runLater(()->{model.clear();model.clear();initModel();});
     }
 }

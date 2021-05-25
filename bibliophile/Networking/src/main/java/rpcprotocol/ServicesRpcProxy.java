@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -271,8 +270,8 @@ public class ServicesRpcProxy implements IService
             var ok = (boolean) response.data();
             return ok;
         }
-        closeConnection();
-        throw new IllegalArgumentException(response.data().toString());
+        else
+            throw new IllegalArgumentException(response.data().toString());
     }
 
     @Override
@@ -302,6 +301,31 @@ public class ServicesRpcProxy implements IService
             return returns;
         }
         return null;
+    }
+
+    @Override
+    public void returnLoan(Return ret)
+    {
+        Request request = new Request.Builder().type(RequestType.RETURN_BOOK).data(ret).build();
+        try
+        {
+            sendRequest(request);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Response response = null;
+        try
+        {
+            response = readResponse();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        if(response.type() != ResponseType.OK)
+            throw new IllegalArgumentException(response.data().toString());
+
     }
 
 

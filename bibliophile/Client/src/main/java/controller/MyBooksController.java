@@ -1,24 +1,22 @@
 package controller;
-import domain.Book;
 import domain.Reader;
 import domain.Return;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import service.IService;
+import service.Observer;
 
 import java.io.File;
 import java.time.LocalDate;
 
-public class MyBooksController
+public class MyBooksController implements Observer
 {
     public TableView<Return> tableView;
     public TableColumn<Return,ImageView> tableColumnImg;
@@ -32,6 +30,7 @@ public class MyBooksController
     {
         this.service = service;
         this.reader = reader;
+        this.service.addObserver(this);
         initModel();
     }
     @FXML
@@ -63,4 +62,8 @@ public class MyBooksController
         return iv;
     }
 
+    @Override
+    public void update() {
+        Platform.runLater(()->{model.clear();model.clear();initModel();});
+    }
 }

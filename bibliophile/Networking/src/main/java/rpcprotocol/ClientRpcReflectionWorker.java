@@ -209,6 +209,21 @@ public class ClientRpcReflectionWorker implements Runnable, Observer
             return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
         }
     }
+    private Response handleRETURN_BOOK(Request request)
+    {
+        try
+        {
+            Return aReturn = (Return) request.data();
+            server.returnLoan(aReturn);
+            Response response;
+            response = new Response.Builder().type(ResponseType.OK).build();
+            return response;
+        }
+        catch (Exception e)
+        {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
 
     @Override
     public void update()

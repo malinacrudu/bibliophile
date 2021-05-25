@@ -74,6 +74,10 @@ public class LoggedInControllerReader
         }
     }
 
-    public void log_out(ActionEvent actionEvent) {
+    public void log_out(ActionEvent actionEvent)
+    {
+        service.removeObserver(null);
+        this.old_stage.show();
+        this.stage.close();
     }
 }

@@ -3,9 +3,7 @@ import domain.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import repository.interfaces.*;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Service implements IService
@@ -16,7 +14,7 @@ public class Service implements IService
     private RepositoryBook bookRepository;
     private RepositoryLoan loanRepository;
     private RepositoryReturn returnRepository;
-
+    private List<Observer> observers = new ArrayList<>();
     private static final Logger logger= LogManager.getLogger();
 
     public Service( RepositoryLibrarian librarianRepository, RepositoryReader readerRepository,  RepositoryBook bookRepository, RepositoryLoan loanRepository, RepositoryReturn returnRepository)
@@ -28,9 +26,6 @@ public class Service implements IService
        this.returnRepository = returnRepository;
        logger.info("Initializing service");
     }
-
-
-    private List<Observer> observers = new ArrayList<>();
 
 
     @Override
@@ -150,6 +145,10 @@ public class Service implements IService
             bookRepository.update(found);
             loan.setBook(found);
             loanRepository.save(loan);
+            for(Observer o : observers)
+            {
+                o.update();
+            }
             return  true;
            }
     }
@@ -170,4 +169,28 @@ public class Service implements IService
         }
         return returns;
     }
+
+    @Override
+    public void returnLoan(Return ret)
+    {
+        try {
+            returnRepository.save(ret);
+            Loan loan = ret.getLoan();
+            loan.setReturned(true);
+            loanRepository.update(loan);
+            Book book = ret.getLoan().getBook();
+            book.setAlready_borrowed(false);
+            bookRepository.update(book);
+            for(Observer o : observers)
+            {
+                o.update();
+            }
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

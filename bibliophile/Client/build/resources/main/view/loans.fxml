@@ -7,11 +7,6 @@
 <BorderPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color:  #F9EAC2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoansController">
     <center>
         <VBox alignment="CENTER" fillWidth="false" layoutY="60.0" prefHeight="400.0" prefWidth="1000.0" spacing="10.0" style="-fx-spacing: 5;">
-            <TextField fx:id="search" alignment="CENTER" layoutX="405.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="192.0" promptText="Search loan" style="-fx-background-radius: 15;">
-                <font>
-                    <Font name="Century Gothic" size="12.0" />
-                </font>
-            </TextField>
             <TableView fx:id="tableView"  editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="279.0" prefWidth="720.0" stylesheets="@tableSyle.css">
                 <columns>
                     <TableColumn fx:id="tableColumnId" prefWidth="120" style="-fx-font-family:'Century Gothic'" text="PIC" />

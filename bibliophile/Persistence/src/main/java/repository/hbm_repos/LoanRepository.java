@@ -114,8 +114,20 @@ public class LoanRepository implements RepositoryLoan
     }
 
     @Override
-    public void update(Loan entity) {
-
+    public void update(Loan entity)
+    {
+        try(Session session = sessionFactory.openSession())
+        {
+            Transaction tx=null;
+            try{
+                tx = session.beginTransaction();
+                session.update(entity);
+                tx.commit();
+            } catch(RuntimeException ex){
+                if (tx!=null)
+                    tx.rollback();
+            }
+        }
     }
 
 
