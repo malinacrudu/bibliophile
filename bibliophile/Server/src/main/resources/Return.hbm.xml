@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="domain.Return"
+           table="Returns">
+        <id name="id" type="long">
+            <generator class="increment"/>
+        </id>
+        <property name ="loanId"/>
+        <property name ="librarianId"/>
+        <property name ="returnDate"/>
+    </class>
+</hibernate-mapping>

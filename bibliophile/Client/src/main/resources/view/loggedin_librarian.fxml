@@ -41,7 +41,7 @@
                     <children>
                         <TabPane fx:id="tPane" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F9EAC2; -fx-border-color: #F9EAC2;-fx-text-base-color:#F9EAC2;" styleClass="floating" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                             <tabs>
-                                <Tab fx:id="addTab" style="-fx-background-color: #B97D60; -fx-font-family: 'Century Gothic';" text="Manage loans" />
+                                <Tab fx:id="loansTab" style="-fx-background-color: #B97D60; -fx-font-family: 'Century Gothic';" text="Manage loans" />
                             </tabs>
                         </TabPane>
                     </children>

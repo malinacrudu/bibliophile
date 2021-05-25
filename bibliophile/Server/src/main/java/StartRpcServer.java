@@ -1,20 +1,23 @@
+import domain.Librarian;
+import domain.Loan;
+import domain.Reader;
+import domain.Return;
 import domain.validators.ValidatorBook;
+import domain.validators.ValidatorLoan;
+import domain.validators.ValidatorReturn;
 import domain.validators.ValidatorUser;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import repository.hbm_repos.BookRepository;
-import repository.hbm_repos.LibrarianRepository;
-import repository.hbm_repos.ReaderRepository;
-import repository.interfaces.RepositoryBook;
-import repository.interfaces.RepositoryLibrarian;
-import repository.interfaces.RepositoryReader;
+import repository.hbm_repos.*;
+import repository.interfaces.*;
 import service.Service;
 import utils.AbstractServer;
 import utils.RpcConcurrentServer;
 import utils.ServerException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Properties;
 
 public class StartRpcServer
@@ -36,11 +39,15 @@ public class StartRpcServer
             return;
         }
         SessionFactory s = initialize();
+        if(s==null)
+            throw new RuntimeException("Invalid session!");
         RepositoryLibrarian repositoryLibrarian=new LibrarianRepository(new ValidatorUser(), s);
         RepositoryReader repositoryReader=new ReaderRepository(new ValidatorUser(), s);
         RepositoryBook repositoryBook=new BookRepository(new ValidatorBook(), s);
+        RepositoryLoan repositoryLoan=new LoanRepository(new ValidatorLoan(), s);
+        RepositoryReturn repositoryReturn=new ReturnRepository(new ValidatorReturn(), s);
+        Service service = new Service(repositoryLibrarian,repositoryReader,repositoryBook,repositoryLoan,repositoryReturn);
 
-        Service service = new Service(repositoryLibrarian,repositoryReader,repositoryBook);
         int serverPort=defaultPort;
         try
         {
@@ -64,6 +71,7 @@ public class StartRpcServer
                 System.err.println("Error stopping server:"+e.getMessage());
             }
         }
+
     }
 
     static SessionFactory initialize()
@@ -75,7 +83,8 @@ public class StartRpcServer
         try {
             return new MetadataSources( registry ).buildMetadata().buildSessionFactory();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.err.println("Exception "+e);
             StandardServiceRegistryBuilder.destroy( registry );
         }

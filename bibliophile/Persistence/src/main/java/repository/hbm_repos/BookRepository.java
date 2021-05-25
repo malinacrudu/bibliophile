@@ -65,7 +65,7 @@ public class BookRepository implements RepositoryBook
             try{
                 tx = session.beginTransaction();
                 books = session.createQuery("FROM Book", Book.class).list();
-                System.out.println( books.size() + " librarian(s) found:" );
+                System.out.println( books.size() + " book(s) found:" );
                 tx.commit();
             }
             catch(RuntimeException ex)
@@ -114,7 +114,18 @@ public class BookRepository implements RepositoryBook
     @Override
     public void update(Book entity)
     {
-
+        try(Session session = sessionFactory.openSession())
+        {
+            Transaction tx=null;
+            try{
+                tx = session.beginTransaction();
+                session.update(entity);
+                tx.commit();
+            } catch(RuntimeException ex){
+                if (tx!=null)
+                    tx.rollback();
+            }
+        }
     }
 
     @Override

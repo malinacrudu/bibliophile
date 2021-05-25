@@ -11,7 +11,6 @@ repositories {
     mavenCentral()
 }
 
-mainClassName='Main'
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -23,4 +22,3 @@ javafx {
     version = "13"
     modules = [ 'javafx.controls' , 'javafx.fxml']
 }
-mainClassName = 'MainFX'

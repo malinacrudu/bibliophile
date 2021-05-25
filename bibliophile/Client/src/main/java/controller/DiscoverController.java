@@ -1,5 +1,6 @@
 package controller;
 import domain.Book;
+import domain.Loan;
 import domain.Reader;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -8,14 +9,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import service.IService;
 import java.io.File;
+import java.time.LocalDate;
 
 public class DiscoverController {
 
@@ -106,5 +105,29 @@ public class DiscoverController {
 
     public void borrow(ActionEvent actionEvent)
     {
+       Book book = tableView.getSelectionModel().getSelectedItem();
+       Loan loan = new Loan(reader, book, LocalDate.now(),false);
+       try
+       {
+           boolean ok = service.borrowBook(loan);
+           if(ok) {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION, "You successfully borrowed a new book! Happy reading!", ButtonType.OK);
+               alert.setResizable(true);
+               alert.show();
+           }
+           else
+           {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION, "Someone already borrowed this book!", ButtonType.OK);
+               alert.setResizable(true);
+               alert.show();
+           }
+
+       }
+       catch (Exception e)
+       {
+           Alert alert = new Alert(Alert.AlertType.ERROR,e.getMessage(), ButtonType.OK);
+           alert.setResizable(true);
+           alert.show();
+       }
     }
 }

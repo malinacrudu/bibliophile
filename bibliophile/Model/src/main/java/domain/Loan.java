@@ -10,12 +10,34 @@ public class Loan extends Entity<Long> implements Serializable
     private LocalDate loanDate;
     private boolean returned;
     private Long readerId;
+    private Long bookId;
+
+    public Loan() {
+    }
 
     public Loan(Reader reader, Book book, LocalDate loanDate, boolean returned) {
         this.reader = reader;
         this.book = book;
         this.loanDate = loanDate;
         this.returned = returned;
+        this.bookId = book.getId();
+        this.readerId = reader.getId();
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
+
+    public Long getReaderId() {
+        return readerId;
+    }
+
+    public void setReaderId(Long readerId) {
+        this.readerId = readerId;
     }
 
     public boolean isReturned() {
@@ -73,6 +95,8 @@ public class Loan extends Entity<Long> implements Serializable
                 ", book=" + book +
                 ", loanDate=" + loanDate +
                 ", returned=" + returned +
+                ", readerId=" + readerId +
+                ", bookId=" + bookId +
                 '}';
     }
 }

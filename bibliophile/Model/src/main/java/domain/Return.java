@@ -6,13 +6,36 @@ import java.util.Objects;
 public class Return extends Entity<Long> implements Serializable
 {
     private Librarian librarian;
+    private Long librarianId;
     private Loan loan;
+    private Long loanId;
     private LocalDate returnDate;
+
+    public Return() {
+    }
+
+    public Long getLibrarianId() {
+        return librarianId;
+    }
+
+    public void setLibrarianId(Long librarianId) {
+        this.librarianId = librarianId;
+    }
+
+    public Long getLoanId() {
+        return loanId;
+    }
+
+    public void setLoanId(Long loanId) {
+        this.loanId = loanId;
+    }
 
     public Return(Librarian librarian, Loan loan, LocalDate returnDate) {
         this.librarian = librarian;
         this.loan = loan;
         this.returnDate = returnDate;
+        this.librarianId = librarian.getId();
+        this.loanId = loan.getId();
     }
 
     public Librarian getLibrarian() {

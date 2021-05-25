@@ -1,7 +1,5 @@
 package rpcprotocol;
-import domain.Book;
-import domain.Librarian;
-import domain.Reader;
+import domain.*;
 import service.Observer;
 import service.Service;
 import java.io.IOException;
@@ -150,6 +148,34 @@ public class ClientRpcReflectionWorker implements Runnable, Observer
             return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
         }
     }
+    private Response handleGET_LOANS(Request request)
+    {
+        try
+        {
+            Iterable<Loan> loanIterable = server.getLoans();
+            Response response = new Response.Builder().type(ResponseType.OK).data(loanIterable).build();
+            return response;
+        }
+        catch (Exception e)
+        {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
+
+    private Response handleGET_MY_BOOKS(Request request)
+    {
+        try
+        {
+            Reader reader = (Reader) request.data();
+            Iterable<Return> myReturns = server.getMyBooks(reader);
+            Response response = new Response.Builder().type(ResponseType.OK).data(myReturns).build();
+            return response;
+        }
+        catch (Exception e)
+        {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
 
     private Response handleGET_BOOKS_FOR_BORROWING(Request request)
     {
@@ -157,6 +183,25 @@ public class ClientRpcReflectionWorker implements Runnable, Observer
         {
             Iterable<Book> booksForBorrowing = server.getBooksForBorrowing();
             Response response = new Response.Builder().type(ResponseType.OK).data(booksForBorrowing).build();
+            return response;
+        }
+        catch (Exception e)
+        {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
+
+    private Response handleBORROW_BOOK(Request request)
+    {
+        try
+        {
+            Loan loan = (Loan) request.data();
+            boolean ok = server.borrowBook(loan);
+            Response response;
+            if (ok)
+                response = new Response.Builder().type(ResponseType.OK).data(ok).build();
+            else
+                response = new Response.Builder().type(ResponseType.NO).data(ok).build();
             return response;
         }
         catch (Exception e)

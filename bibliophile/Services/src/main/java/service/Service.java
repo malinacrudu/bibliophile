@@ -1,14 +1,11 @@
 package service;
-import domain.Book;
-import domain.Librarian;
-import domain.Reader;
-import domain.User;
+import domain.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import repository.interfaces.RepositoryBook;
-import repository.interfaces.RepositoryLibrarian;
-import repository.interfaces.RepositoryReader;
+import repository.interfaces.*;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Service implements IService
@@ -17,14 +14,18 @@ public class Service implements IService
     private RepositoryLibrarian librarianRepository;
     private RepositoryReader readerRepository;
     private RepositoryBook bookRepository;
+    private RepositoryLoan loanRepository;
+    private RepositoryReturn returnRepository;
 
     private static final Logger logger= LogManager.getLogger();
 
-    public Service( RepositoryLibrarian librarianRepository, RepositoryReader readerRepository,  RepositoryBook bookRepository)
+    public Service( RepositoryLibrarian librarianRepository, RepositoryReader readerRepository,  RepositoryBook bookRepository, RepositoryLoan loanRepository, RepositoryReturn returnRepository)
     {
        this.bookRepository = bookRepository;
        this.librarianRepository = librarianRepository;
        this.readerRepository = readerRepository;
+       this.loanRepository = loanRepository;
+       this.returnRepository = returnRepository;
        logger.info("Initializing service");
     }
 
@@ -110,6 +111,22 @@ public class Service implements IService
         return books;
     }
 
+    @Override
+    public Iterable<Loan> getLoans()
+    {
+        logger.traceEntry();
+        Iterable<Loan> loans= loanRepository.findAllUnreturned();
+        for(Loan l : loans)
+        {
+            Book book = bookRepository.findOne(l.getBookId());
+            Reader reader = readerRepository.findOne(l.getReaderId());
+            l.setBook(book);
+            l.setReader(reader);
+        }
+        logger.traceExit();
+        return loans;
+    }
+
 
     @Override
     public Iterable<Book> getBooksForBorrowing()
@@ -118,5 +135,39 @@ public class Service implements IService
         Iterable<Book> books= bookRepository.findBooksForBorrowing();
         logger.traceExit();
         return books;
+    }
+
+    @Override
+    public boolean borrowBook(Loan loan)
+    {
+        Book book = loan.getBook();
+        Book found = bookRepository.findOne(book.getId());
+        if(found.getAlready_borrowed())
+            return false;
+        else
+            {
+            found.setAlready_borrowed(true);
+            bookRepository.update(found);
+            loan.setBook(found);
+            loanRepository.save(loan);
+            return  true;
+           }
+    }
+
+    @Override
+    public Iterable<Return> getMyBooks(Reader reader)
+    {
+        ArrayList<Return> returns = new ArrayList<>();
+        Iterable<Loan> loans = loanRepository.getReturnedLoans(reader.getId());
+        System.out.println(loans);
+        for (Loan loan : loans)
+        {
+            Book book = bookRepository.findOne(loan.getBookId());
+            loan.setBook(book);
+            Return ret = returnRepository.findReturnByLoan(loan.getId());
+            ret.setLoan(loan);
+            returns.add(ret);
+        }
+        return returns;
     }
 }

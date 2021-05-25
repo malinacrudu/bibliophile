@@ -15,5 +15,6 @@
         <property name ="edition"/>
         <property name ="img_path"/>
         <property name ="already_borrowed"/>
+        
     </class>
 </hibernate-mapping>

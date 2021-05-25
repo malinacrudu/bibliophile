@@ -1,13 +1,12 @@
 package rpcprotocol;
-import domain.Book;
-import domain.Librarian;
-import domain.Reader;
+import domain.*;
 import service.IService;
 import service.Observer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -196,6 +195,32 @@ public class ServicesRpcProxy implements IService
     }
 
     @Override
+    public Iterable<Loan> getLoans()
+    {
+        Request request = new Request.Builder().type(RequestType.GET_LOANS).build();
+        try
+        {
+            sendRequest(request);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Response response = null;
+        try
+        {
+            response= readResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(response.type() == ResponseType.OK)
+        {
+            Iterable<Loan> loans = (Iterable<Loan>) response.data();
+            return loans;
+        }
+        return null;
+    }
+
+    @Override
     public Iterable<Book> getBooksForBorrowing()
     {
         Request request = new Request.Builder().type(RequestType.GET_BOOKS_FOR_BORROWING).build();
@@ -217,6 +242,64 @@ public class ServicesRpcProxy implements IService
         {
             Iterable<Book> books = (Iterable<Book>) response.data();
             return books;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean borrowBook(Loan loan)
+    {
+        Request request = new Request.Builder().type(RequestType.BORROW_BOOK).data(loan).build();
+        try
+        {
+            sendRequest(request);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Response response = null;
+        try
+        {
+            response = readResponse();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        if(response.type() == ResponseType.OK || response.type() == ResponseType.NO)
+        {
+            var ok = (boolean) response.data();
+            return ok;
+        }
+        closeConnection();
+        throw new IllegalArgumentException(response.data().toString());
+    }
+
+    @Override
+    public Iterable<Return> getMyBooks(Reader reader)
+    {
+        Request request = new Request.Builder().type(RequestType.GET_MY_BOOKS).data(reader).build();
+        try
+        {
+            sendRequest(request);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Response response = null;
+        try
+        {
+            response= readResponse();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        if(response.type() == ResponseType.OK)
+        {
+            Iterable<Return> returns = (Iterable<Return>) response.data();
+            return returns;
         }
         return null;
     }

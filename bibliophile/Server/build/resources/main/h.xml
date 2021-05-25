@@ -17,5 +17,7 @@
         <mapping resource="Book.hbm.xml"/>
         <mapping resource="Librarian.hbm.xml"/>
         <mapping resource="Reader.hbm.xml"/>
+        <mapping resource="Loan.hbm.xml"/>
+        <mapping resource="Return.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
