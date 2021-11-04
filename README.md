@@ -3,7 +3,7 @@
 <h2>An app for managing a library</h2>
 <img src="images/loggo.gif" alt="App's loggo" width="500px" height="500px"/>
 <h3>What is <i>bibliophile</i> and how was it made?</h3>
-bibliophile is a desktop application that can help any library in their
+<i>bibliophile</i> is a desktop application that can help any library in their
 pursue of managing their day to day activities: from lending books
 to keeping an inventory of all their volumes. It is a JavaFX app with a
 friendly GUI, that uses a SQLite local data base. As a client/server application
