@@ -7,7 +7,7 @@ bibliophile is a desktop application that can help any library in their
 pursue of managing their day to day activities: from lending books
 to keeping an inventory of all their volumes. It is a JavaFX app with a
 friendly GUI, that uses a SQLite local data base. As a client/server application
-it is based on the RPC protocole.
+it is based on the RPC protocol.
 When you are running the app the first window asks the user to select
 if they are a reader or a librarian.
 <img src="images/1.png" alt="Reader log in" width="500px" height="500px"/>
