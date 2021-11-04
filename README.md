@@ -1,10 +1,12 @@
 
 <h1>bibliophile</h1>
-An app for managing a library
+<h2>An app for managing a library</h2>
+<center>
 <img src="images/loggo.gif" alt="App's loggo"/>
-<h2>What is <b>bibliophile</b> and how was it made?</h2>
+</center>
+<h3>What is <b>bibliophile</b> and how was it made?</h3>
 
-<h2>What can you do as a reader?</h2>
+<h3>What can you do as a reader?</h3>
 
-<h2>What can you do as a librarian?</h2>
+<h3>What can you do as a librarian?</h3>
 
