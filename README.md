@@ -1,4 +1,10 @@
-# iss
-Anul 2 / Sem 2 / iss
 
-1. BIBLIOTECA O biblioteca ofera abonatilor sai o lista de carti ce pot fi imprumutate. Pentru un abonat, se retin în sistem (cel putin) informații legate de cnp, nume, adresa, telefon și un cod unic de identificare a acestuia în cadrul bibliotecii. Fiecare carte poate exista în unul sau mai multe exemplare, identificate prin coduri unice. Biblioteca are mai multe terminale, de unde abonatii pot sa imprumute carti. Pentru a putea folosi un terminal, un abonat trebuie să se autentifice. Dupa autentificare, acesta vede lista exemplarelor disponibile în acel moment si poate imprumuta unul sau mai multe. Pentru restituirea cartilor, exista un singur punct de lucru, deservit de un bibliotecar. Dupa fiecare împrumut/restituire, toți utilizatorii terminalelor bibliotecii văd lista actualizata a cartilor disponibile. Fiecare abonat poate vedea ce carti a imprumutat printr-o "biblioteca locala" unde apar ce carti a citit si perioada in care le-a citit pentru a se putea observa evolutia sa de-a lungul timpului.
+<h1>bibliophile</h1>
+An app for managing a library
+<img src="images/1.png" alt="Starting window"/>
+<h2>Hhat is <b>bibliophile</b> and how was it made?</h2>
+
+<h2>What can you do as a reader?</h2>
+
+<h2>What can you do as a librarian?</h2>
+

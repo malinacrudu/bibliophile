@@ -5,7 +5,7 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Utilizator\Desktop\sem2\iss\iss_lab_git\bibliophile\Server\library.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Utilizator\Desktop\documente\Anul2_faculta\sem2\iss\iss_lab_git\bibliophile\Server\library.db</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
